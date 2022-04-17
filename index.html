@@ -9,10 +9,10 @@
 </head>
 <body>
 <nav class="navbar-dark bg-primary">
-    <a id="form-link" href="#">Form</a>
-    <a id="history-link" href="#">History</a>
+    <a id="form-link" href="index.html">Form</a>
+    <a id="history-link" href="history.html">History</a>
 </nav>
-<form>
+<form id="form" role="form">
     <div class="mb-3">
         <label for="first-name" class="form-label">First Name</label>
         <input type="text"
@@ -34,7 +34,7 @@
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input
-                type="email"
+                type="text"
                 class="form-control"
                 id="email"
                 name="email"
@@ -44,7 +44,7 @@
     <div class="mb-3">
         <label for="phone" class="form-label">Phone</label>
         <input
-                type="number"
+                type="text"
                 class="form-control"
                 id="phone"
                 name="phone"
@@ -71,7 +71,7 @@
                 onkeyup='saveValue(this)'
         >
     </div>
-    <button type="submit" class="btn btn-primary">Submit form</button>
+    <button type="submit" class="btn btn-primary" id="submit-button" onclick="clearInputs()">Submit form</button>
 </form>
 <script src="script.js"></script>
 </body>

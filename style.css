@@ -18,14 +18,15 @@ nav a {
     text-decoration: none;
 }
 
-form {
+form,
+.submit-history-card {
     display: flex;
     flex-direction: column;
-    max-width: 72em;
+    max-width: 50%;
     margin: auto;
 }
 
 button {
-    max-width: 24em;
-    margin-left: 24em;
+    max-width: 34%;
+    margin-left: 33%;
 }
