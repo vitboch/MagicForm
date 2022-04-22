@@ -8,6 +8,7 @@ document.getElementById('address').value = getSavedValue('address')
 
 // save value to localStorage as (ID, VALUE)
 function saveValue(event) {
+
     // get the id
     const myId = event.id
 
@@ -16,7 +17,6 @@ function saveValue(event) {
 
     // save a key/value pair
     localStorage.setItem(myId, myValue)
-
 }
 
 // get data by key
@@ -27,7 +27,7 @@ function getSavedValue (myValue) {
     return localStorage.getItem(myValue)
 }
 
-// get data by key
+// clear all input fields
 function clearInputs() {
     return window.localStorage.clear()
 }
@@ -40,9 +40,11 @@ let data = []
 
 // add an event listener to the form
 myForm.addEventListener('submit', function(event) {
-    // prevent the page from reloading when submitting the form
-    event.preventDefault();
 
+    // prevent the page from reloading when submitting the form
+    event.preventDefault()
+
+    // add object with key and value of each input
     let inputCard = {
         firstName: document.getElementById('first-name').value,
         lastName: document.getElementById('last-name').value,
@@ -51,20 +53,29 @@ myForm.addEventListener('submit', function(event) {
         company: document.getElementById('company').value,
         address: document.getElementById('address').value
     }
-    //call function with input box current value
+
+    // call function with input box current value
     addCard(inputCard)
 })
 
-// checking local storage
-if (localStorage.getItem('data')) {
-    // converts back to array and store it in data array
-    data = JSON.parse(localStorage.getItem('data'))
+// function helps to get everything from local storage
+function getFromLocalStorage() {
+    const reference = localStorage.getItem('data')
+
+    // if reference exists
+    if (reference) {
+
+        // converts back to array and store it in data array
+        data = JSON.parse(reference)
+    }
 }
 
 // function to add card
 function addCard(item) {
+
     // if item is not empty
     if (item !== '') {
+
         // make a card object
         // which has id, name, and completed properties
         const card = {
@@ -72,10 +83,10 @@ function addCard(item) {
             name: item,
         }
 
-        // then add it to data array
+        // add it to data array
         data.push(card)
 
-        // then store it in local storage
+        // store it in local storage
         // convert the array to string then store it
         localStorage.setItem('data', JSON.stringify(data))
 
@@ -83,3 +94,10 @@ function addCard(item) {
         myForm.reset()
     }
 }
+
+// add interval to get data from local storage
+setInterval(getFromLocalStorage, 100)
+
+// reload page on local storage change
+window.addEventListener('storage', () => location.reload())
+
